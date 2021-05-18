@@ -8,13 +8,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Pong Demo',
+        title: 'Pong v1.0.3',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         home: Scaffold(
             appBar: AppBar(
-              title: Text('Simple Pong'),
+              title: Text('Pong'),
             ),
             body: Pong()
         ));
