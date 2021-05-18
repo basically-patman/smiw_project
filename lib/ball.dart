@@ -8,7 +8,7 @@ class Ball extends StatelessWidget {
       width: diam,
       height: diam,
       decoration: new BoxDecoration(
-        color: Colors.amber[400],
+        color: Colors.black,
         shape: BoxShape.circle,
       ),
     );

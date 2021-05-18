@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Pong v1.0.3',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
         ),
         home: Scaffold(
             appBar: AppBar(
