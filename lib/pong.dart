@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:smiw_project/Bat2.dart';
 import 'ball.dart';
 import 'bat.dart';
+import 'Bat2.dart';
 
 enum Direction { up, down, left, right }
 
@@ -19,6 +21,9 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
   double batWidth;
   double batHeight;
   double batPosition = 0;
+  double bat2Width;
+  double bat2Height;
+  double bat2Position = 0;
   Direction vDir = Direction.down;
   Direction hDir = Direction.right;
   Animation<double> animation;
@@ -65,6 +70,8 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
           width = constraints.maxWidth;
           batWidth = width / 5;
           batHeight = height / 20;
+          bat2Width = width / 5;
+          bat2Height = height / 20;
 
           return Stack(
             children: <Widget>[
@@ -80,12 +87,19 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
                 left: posX,
               ),
               Positioned(
-                  bottom: 0,
+                  bottom: 7,
                   left: batPosition,
                   child: GestureDetector(
                       onHorizontalDragUpdate: (DragUpdateDetails update) =>
                           moveBat(update, context),
                       child: Bat(batWidth, batHeight))),
+              Positioned(
+                  top: 7,
+                  left: bat2Position,
+                  child: GestureDetector(
+                      onHorizontalDragUpdate: (DragUpdateDetails update) =>
+                          moveBat2(update, context),
+                      child: Bat2(bat2Width, bat2Height))),
             ],
           );
         }
@@ -115,6 +129,9 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
         showMessage(context);
       }
     }
+
+
+
     if (posY <= 0 && vDir == Direction.up) {
       vDir = Direction.down;
       randX = randomNumber();
@@ -124,6 +141,12 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
   void moveBat(DragUpdateDetails update, BuildContext context) {
     setState(() {
       batPosition += update.delta.dx;
+    });
+  }
+
+  void moveBat2(DragUpdateDetails update, BuildContext context) {
+    setState(() {
+      bat2Position += update.delta.dx;
     });
   }
 

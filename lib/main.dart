@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:smiw_project/menuoptionsscreen.dart';
 import 'pong.dart';
 
 void main() => runApp(MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
             appBar: AppBar(
               title: Text('Pong'),
             ),
-            body: Pong()
+            body: MenuOptionsScreen()
         ));
   }
 }
