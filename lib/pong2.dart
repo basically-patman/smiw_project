@@ -59,37 +59,38 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          height = constraints.maxHeight;
-          width = constraints.maxWidth;
-          batWidth = width / 1.8;
-          batHeight = height / 20;
 
-          return Stack(
-            children: <Widget>[
-              Positioned(
-                top: 0,
-                right: 24,
-                child: Text('Score: ' + score.toString()),
-              ),
-
-              Positioned(
-                child: Ball(),
-                top: posY,
-                left: posX,
-              ),
-              Positioned(
-                  bottom: 0,
-                  left: batPosition,
-                  child: GestureDetector(
-                      onHorizontalDragUpdate: (DragUpdateDetails update) =>
-                          moveBat(update, context),
-                      child: Bat(batWidth, batHeight))),
-            ],
-          );
-        }
-    );
+      return LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            height = constraints.maxHeight;
+            width = constraints.maxWidth;
+            batWidth = width / 5;
+            batHeight = height / 20;
+  
+            return Stack(
+              children: <Widget>[
+                Positioned(
+                  top: 0,
+                  right: 24,
+                  child: Text('Score: ' + score.toString()),
+                ),
+  
+                Positioned(
+                  child: Ball(),
+                  top: posY,
+                  left: posX,
+                ),
+                Positioned(
+                    bottom: 0,
+                    left: batPosition,
+                    child: GestureDetector(
+                        onHorizontalDragUpdate: (DragUpdateDetails update) =>
+                            moveBat(update, context),
+                        child: Bat(batWidth, batHeight))),
+              ],
+            );
+          }
+      );
   }
 
   void checkBorders() {
@@ -141,6 +142,7 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
             title: Text('Game Over'),
             content: Text('Would you like to play again?'),
             actions: <Widget>[
+              // ignore: deprecated_member_use
               FlatButton(
                 child: Text('Yes'),
                 onPressed: () {
@@ -153,11 +155,14 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
                   controller.repeat();
                 },
               ),
+              // ignore: deprecated_member_use
               FlatButton(
                 child: Text('No'),
                 onPressed: () {
+                  controller.stop();
+                  controller.dispose();
                   Navigator.of(context).pop();
-                  dispose();
+                  Navigator.of(context).pop();
                 },)
             ],
           );

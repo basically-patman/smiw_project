@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:smiw_project/pong.dart';
+
+
 
 class Option {
   Icon icon;
@@ -10,43 +14,13 @@ class Option {
 
 final options = [
   Option(
-    icon: Icon(Icons.dashboard, size: 40.0),
-    title: 'Option One',
-    subtitle: 'Lorem ipsum dolor sit amet, consect.',
+    icon: Icon(Icons.sports_baseball, size: 40.0),
+    title: 'Singleplayer',
+    subtitle: 'Play alone.',
   ),
   Option(
-    icon: Icon(Icons.do_not_disturb, size: 40.0),
-    title: 'Option Two',
-    subtitle: 'Lorem ipsum dolor sit amet, consect.',
-  ),
-  Option(
-    icon: Icon(Icons.account_circle, size: 40.0),
-    title: 'Option Three',
-    subtitle: 'Lorem ipsum dolor sit amet, consect.',
-  ),
-  Option(
-    icon: Icon(Icons.invert_colors, size: 40.0),
-    title: 'Option Four',
-    subtitle: 'Lorem ipsum dolor sit amet, consect.',
-  ),
-  Option(
-    icon: Icon(Icons.watch_later, size: 40.0),
-    title: 'Option Five',
-    subtitle: 'Lorem ipsum dolor sit amet, consect.',
-  ),
-  Option(
-    icon: Icon(Icons.fastfood, size: 40.0),
-    title: 'Option Six',
-    subtitle: 'Lorem ipsum dolor sit amet, consect.',
-  ),
-  Option(
-    icon: Icon(Icons.local_airport, size: 40.0),
-    title: 'Option Seven',
-    subtitle: 'Lorem ipsum dolor sit amet, consect.',
-  ),
-  Option(
-    icon: Icon(Icons.settings, size: 40.0),
-    title: 'Option Eight',
-    subtitle: 'Lorem ipsum dolor sit amet, consect.',
+    icon: Icon(Icons.people_alt_sharp, size: 40.0),
+    title: 'Multiplayer',
+    subtitle: 'Play with friend.',
   ),
 ];

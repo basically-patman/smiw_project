@@ -1,9 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smiw_project/Bat2.dart';
 import 'ball.dart';
 import 'bat.dart';
 import 'Bat2.dart';
+import 'menuoptionsscreen.dart';
+import 'main.dart';
 
 enum Direction { up, down, left, right }
 
@@ -68,10 +71,10 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
         builder: (BuildContext context, BoxConstraints constraints) {
           height = constraints.maxHeight;
           width = constraints.maxWidth;
-          batWidth = width / 1.8;
+          batWidth = width / 5;
           batHeight = height / 20;
-          bat2Width = width / 5;
-          bat2Height = height / 20;
+          bat2Width = batWidth;
+          bat2Height = batHeight;
 
           return Stack(
             children: <Widget>[
@@ -164,6 +167,7 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
             title: Text('Game Over'),
             content: Text('Would you like to play again?'),
             actions: <Widget>[
+              // ignore: deprecated_member_use
               FlatButton(
                 child: Text('Yes'),
                 onPressed: () {
@@ -176,11 +180,16 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
                   controller.repeat();
                 },
               ),
+              // ignore: deprecated_member_use
               FlatButton(
                 child: Text('No'),
                 onPressed: () {
+                  controller.stop();
+                  controller.dispose();
                   Navigator.of(context).pop();
-                  dispose();
+                  Navigator.of(context).pop();
+
+
                 },)
             ],
           );
