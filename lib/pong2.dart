@@ -57,10 +57,41 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
     controller.forward();
   }
 
+  Future<bool> _onWillPop() async {
+    controller.stop();
+    return (await showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit an App'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              controller.forward();
+              Navigator.of(context).pop(false);
+
+              },
+            child: new Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              controller.stop();
+              Navigator.of(context).pop(true);
+          },
+            child: new Text('Yes'),
+          ),
+        ],
+      ),
+    )) ?? false;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-
-      return LayoutBuilder(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             height = constraints.maxHeight;
             width = constraints.maxWidth;
@@ -90,7 +121,8 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
               ],
             );
           }
-      );
+      ),
+    );
   }
 
   void checkBorders() {

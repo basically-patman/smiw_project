@@ -65,47 +65,80 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
     controller.forward();
   }
 
+  Future<bool> _onWillPop() async {
+    controller.stop();
+    return (await showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit an App'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              controller.forward();
+              Navigator.of(context).pop(false);
+
+            },
+            child: new Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              controller.stop();
+              Navigator.of(context).pop(true);
+            },
+            child: new Text('Yes'),
+          ),
+        ],
+      ),
+    )) ?? false;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          height = constraints.maxHeight;
-          width = constraints.maxWidth;
-          batWidth = width / 5;
-          batHeight = height / 20;
-          bat2Width = batWidth;
-          bat2Height = batHeight;
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            height = constraints.maxHeight;
+            width = constraints.maxWidth;
+            batWidth = width / 5;
+            batHeight = height / 20;
+            bat2Width = batWidth;
+            bat2Height = batHeight;
 
-          return Stack(
-            children: <Widget>[
-              Positioned(
-                top: 0,
-                right: 24,
-                child: Text('Score: ' + score.toString()),
-              ),
+            return Stack(
+              children: <Widget>[
+                Positioned(
+                  top: 0,
+                  right: 24,
+                  child: Text('Score: ' + score.toString()),
+                ),
 
-              Positioned(
-                child: Ball(),
-                top: posY,
-                left: posX,
-              ),
-              Positioned(
-                  bottom: 7,
-                  left: batPosition,
-                  child: GestureDetector(
-                      onHorizontalDragUpdate: (DragUpdateDetails update) =>
-                          moveBat(update, context),
-                      child: Bat(batWidth, batHeight))),
-              Positioned(
-                  top: 7,
-                  left: bat2Position,
-                  child: GestureDetector(
-                      onHorizontalDragUpdate: (DragUpdateDetails update) =>
-                          moveBat2(update, context),
-                      child: Bat2(bat2Width, bat2Height))),
-            ],
-          );
-        }
+                Positioned(
+                  child: Ball(),
+                  top: posY,
+                  left: posX,
+                ),
+                Positioned(
+                    bottom: 7,
+                    left: batPosition,
+                    child: GestureDetector(
+                        onHorizontalDragUpdate: (DragUpdateDetails update) =>
+                            moveBat(update, context),
+                        child: Bat(batWidth, batHeight))),
+                Positioned(
+                    top: 7,
+                    left: bat2Position,
+                    child: GestureDetector(
+                        onHorizontalDragUpdate: (DragUpdateDetails update) =>
+                            moveBat2(update, context),
+                        child: Bat2(bat2Width, bat2Height))),
+              ],
+            );
+          }
+      ),
     );
   }
 

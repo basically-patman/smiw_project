@@ -50,27 +50,6 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
         backgroundColor: Colors.red,
         title: Text('Menu Options'),
         // ignore: deprecated_member_use
-        leading: FlatButton(
-          textColor: Colors.white,
-          child: Icon(
-            Icons.arrow_back,
-          ),
-          onPressed: () => _pushSaved(1),
-        ),
-        actions: <Widget>[
-          // ignore: deprecated_member_use
-          FlatButton(
-            textColor: Colors.white,
-            child: Text(
-              'HELP',
-              style: TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onPressed: () => _pushSaved(2),
-          )
-        ],
       ),
       body: ListView.builder(
         itemCount: options.length + 2,
