@@ -39,8 +39,8 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    posX = 0;
-    posY = 0;
+    posX = 2;
+    posY = 2;
     controller = AnimationController(
       duration: const Duration(hours: 999999),
       vsync: this,
@@ -110,10 +110,13 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
 
             return Stack(
               children: <Widget>[
-                Positioned(
-                  top: 0,
-                  right: 24,
-                  child: Text('Score: ' + score.toString()),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    score.toString(),
+                    style: TextStyle( fontWeight: FontWeight.bold, fontSize: 200, color: Colors.red.withOpacity(0.7)),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
 
                 Positioned(
@@ -164,9 +167,23 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
         controller.stop();
         showMessage(context);
       }
+
     }
 
-
+    // if (posY >= height - diameter - bat2Height && vDir == Direction.up) {
+    //   if (posX >= (bat2Position - diameter) &&
+    //       posX <= (bat2Position + bat2Width + diameter)) {
+    //     //vDir = Direction.down;
+    //     randY = randomNumber();
+    //     setState(() {
+    //       score++;
+    //     });
+    //   } else {
+    //     controller.stop();
+    //     showMessage(context);
+    //   }
+    //
+    // }
 
     if (posY <= 0 && vDir == Direction.up) {
       vDir = Direction.down;
@@ -205,8 +222,8 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
                 child: Text('Yes'),
                 onPressed: () {
                   setState(() {
-                    posX = 0;
-                    posY = 0;
+                    posX = width/2;
+                    posY = height/2;
                     score = 0;
                   });
                   Navigator.of(context).pop();

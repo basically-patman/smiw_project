@@ -100,11 +100,15 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
   
             return Stack(
               children: <Widget>[
-                Positioned(
-                  top: 0,
-                  right: 24,
-                  child: Text('Score: ' + score.toString()),
-                ),
+                   Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      score.toString(),
+                      style: TextStyle( fontWeight: FontWeight.bold, fontSize: 200, color: Colors.red.withOpacity(0.7)),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+
   
                 Positioned(
                   child: Ball(),
