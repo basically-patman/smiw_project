@@ -1,12 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:smiw_project/Bat2.dart';
 import 'ball.dart';
 import 'bat.dart';
 import 'Bat2.dart';
-import 'menuoptionsscreen.dart';
-import 'main.dart';
 
 enum Direction { up, down, left, right }
 
