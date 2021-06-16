@@ -114,11 +114,20 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
               children: <Widget>[
                 Align(
                   alignment: Alignment.topCenter,
-                  child: new RotatedBox(quarterTurns: 2, child:  Text(
+                  child: new RotatedBox(quarterTurns: 2, child: Text(
                     score2.toString(),
                     style: TextStyle( fontWeight: FontWeight.bold, fontSize: 200, color: Colors.red.withOpacity(0.7)),
                     textAlign: TextAlign.center,
                     ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: new RotatedBox(quarterTurns: 2, child: Text(
+                    'Player 2',
+                    style: TextStyle( fontWeight: FontWeight.bold, fontSize: 40, color: Colors.red.withOpacity(0.7)),
+                    textAlign: TextAlign.center,
+                  ),
                   ),
                 ),
                 Align(
@@ -129,7 +138,14 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
                     textAlign: TextAlign.center,
                   ),
                 ),
-
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'Player 1',
+                    style: TextStyle( fontWeight: FontWeight.bold, fontSize: 40, color: Colors.red.withOpacity(0.7)),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
                 Positioned(
                   child: Ball(),
                   top: posY,
