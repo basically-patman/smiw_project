@@ -35,6 +35,10 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
   double randX = 1;
   double randY = 1;
   int score = 0;
+  int score2 = 0;
+  double wx;
+  double wy;
+
 
   @override
   void initState() {
@@ -65,13 +69,14 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
     controller.forward();
   }
 
+
   Future<bool> _onWillPop() async {
     controller.stop();
     return (await showDialog(
       context: context,
       builder: (context) => new AlertDialog(
         title: new Text('Are you sure?'),
-        content: new Text('Do you want to exit an App'),
+        content: new Text('Do you want to exit a game?'),
         actions: <Widget>[
           TextButton(
             onPressed: () {
@@ -111,7 +116,16 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
             return Stack(
               children: <Widget>[
                 Align(
-                  alignment: Alignment.center,
+                  alignment: Alignment.topCenter,
+                  child: new RotatedBox(quarterTurns: 2, child:  Text(
+                    score2.toString(),
+                    style: TextStyle( fontWeight: FontWeight.bold, fontSize: 200, color: Colors.red.withOpacity(0.7)),
+                    textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
                   child: Text(
                     score.toString(),
                     style: TextStyle( fontWeight: FontWeight.bold, fontSize: 200, color: Colors.red.withOpacity(0.7)),
@@ -145,6 +159,9 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
     );
   }
 
+
+
+
   void checkBorders() {
     double diameter = 50;
     if (posX <= 0 && hDir == Direction.left) {
@@ -155,40 +172,48 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
       hDir = Direction.left;
       randX = randomNumber();
     }
+
+
     if (posY >= height - diameter - batHeight && vDir == Direction.down) {
       if (posX >= (batPosition - diameter) &&
           posX <= (batPosition + batWidth + diameter)) {
         vDir = Direction.up;
         randY = randomNumber();
-        setState(() {
-          score++;
-        });
       } else {
         controller.stop();
-        showMessage(context);
+        setState(() {
+          score2++;
+          posX = width/2;
+          posY = height/2;
+        });
+        controller.repeat();
+      }
+    }
+
+    if (posY <= bat2Height && vDir == Direction.up) {
+      if (posX >= (bat2Position - diameter) &&
+          posX <= (bat2Position + bat2Width + diameter)) {
+        vDir = Direction.down;
+        randY = randomNumber();
+
+      } else {
+        controller.stop();
+        setState(() {
+          score++;
+          posX = width/2;
+          posY = height/2;
+        });
+        controller.repeat();
+        // controller.stop();
+        // showMessage(context);
       }
 
     }
 
-    // if (posY >= height - diameter - bat2Height && vDir == Direction.up) {
-    //   if (posX >= (bat2Position - diameter) &&
-    //       posX <= (bat2Position + bat2Width + diameter)) {
-    //     //vDir = Direction.down;
-    //     randY = randomNumber();
-    //     setState(() {
-    //       score++;
-    //     });
-    //   } else {
-    //     controller.stop();
-    //     showMessage(context);
-    //   }
-    //
+    // if (posY <= 0 && vDir == Direction.up) {
+    //   vDir = Direction.down;
+    //   randX = randomNumber();
     // }
-
-    if (posY <= 0 && vDir == Direction.up) {
-      vDir = Direction.down;
-      randX = randomNumber();
-    }
   }
 
   void moveBat(DragUpdateDetails update, BuildContext context) {

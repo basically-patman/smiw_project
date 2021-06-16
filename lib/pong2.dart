@@ -63,7 +63,7 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
       context: context,
       builder: (context) => new AlertDialog(
         title: new Text('Are you sure?'),
-        content: new Text('Do you want to exit an App'),
+        content: new Text('Do you want to exit a game?'),
         actions: <Widget>[
           TextButton(
             onPressed: () {
