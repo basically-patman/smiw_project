@@ -27,6 +27,7 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
   double randX = 1;
   double randY = 1;
   int score = 0;
+  static int record = 0;
 
   @override
   void initState() {
@@ -108,7 +109,14 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
                       textAlign: TextAlign.center,
                     ),
                   ),
-
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    'BEST SCORE \n'+"- "+record.toString()+" -",
+                    style: TextStyle( fontWeight: FontWeight.bold, fontSize: 30, color: Colors.red.withOpacity(0.7)),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
   
                 Positioned(
                   child: Ball(),
@@ -149,7 +157,15 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
         });
       } else {
         controller.stop();
-        showMessage(context);
+        if (record == null || record < score){
+          setState(() {
+            record = score;
+          });
+          showMessage(context, 'You scored a new record: '+record.toString());
+        }
+        else {
+          showMessage(context, 'Your record: '+record.toString());
+        }
       }
     }
     if (posY <= 0 && vDir == Direction.up) {
@@ -170,12 +186,12 @@ class _Pong2State extends State<Pong2> with SingleTickerProviderStateMixin {
     return (50 + myNum) / 100;
   }
 
-  void showMessage(BuildContext context) {
+  void showMessage(BuildContext context, String msg) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Game Over'),
+            title: Text('Game Over \n'+msg),
             content: Text('Would you like to play again?'),
             actions: <Widget>[
               // ignore: deprecated_member_use

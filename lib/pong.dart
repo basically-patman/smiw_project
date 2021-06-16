@@ -182,8 +182,13 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
           score2++;
           posX = width/2;
           posY = height/2;
+          if (score2 > 4 ){
+            showMessage(context, 'Player 2');
+          }
+          else {
+            controller.repeat();
+          }
         });
-        controller.repeat();
       }
     }
 
@@ -199,8 +204,14 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
           score++;
           posX = width/2;
           posY = height/2;
+          if (score > 4){
+            showMessage(context, 'Player 1');
+          }
+          else {
+            controller.repeat();
+          }
         });
-        controller.repeat();
+
         // controller.stop();
         // showMessage(context);
       }
@@ -231,12 +242,12 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
     return (50 + myNum) / 100;
   }
 
-  void showMessage(BuildContext context) {
+  void showMessage(BuildContext context, String msg) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Game Over'),
+            title: Text(''+msg+' won the game'),
             content: Text('Would you like to play again?'),
             actions: <Widget>[
               // ignore: deprecated_member_use
@@ -247,6 +258,7 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
                     posX = width/2;
                     posY = height/2;
                     score = 0;
+                    score2 = 0;
                   });
                   Navigator.of(context).pop();
                   controller.repeat();

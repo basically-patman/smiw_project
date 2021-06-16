@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smiw_project/pong.dart';
+import 'package:smiw_project/pong2.dart';
 
 
 
@@ -16,11 +16,11 @@ final options = [
   Option(
     icon: Icon(Icons.sports_baseball, size: 40.0),
     title: 'Singleplayer',
-    subtitle: 'Play alone.',
+    subtitle: 'Aim for the record.',
   ),
   Option(
     icon: Icon(Icons.people_alt_sharp, size: 40.0),
     title: 'Multiplayer',
-    subtitle: 'Play with friend.',
+    subtitle: 'Play with a friend.',
   ),
 ];

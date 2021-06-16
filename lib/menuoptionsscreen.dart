@@ -33,7 +33,7 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
           else{
             return Scaffold(
                 // ignore: missing_return
-                body: MenuOptionsScreen(),
+                body: null,
             );
           }
         }
@@ -94,12 +94,10 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
                 setState(() {
                   _selectedOption = index - 1;
                 });
-
               }
               //onTap: ()  => _pushSaved(index),
             ),
-          );
-        },
+          );},
       ),
     );
   }

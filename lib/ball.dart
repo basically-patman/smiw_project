@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+
+
 class Ball extends StatelessWidget {
+  int record;
   @override
   Widget build(BuildContext context) {
     final double diam = 50;
